@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends './base.html' %}
+
+{% block content %}
+    
+
+<div class="p-5 bg-light">
+    <div class="container">
+        <h1 class="display-3">Home</h1>
+        <p class="lead">This is the home page.</p>
+        <hr class="my-2">
+        <p>Home page stuff</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('main.home' ) }}" role="button">Go to login
+                page.</a>
+        </p>
+    </div>
+</div>
+
+{% endblock content%}
