@@ -10,7 +10,7 @@ migrate = Migrate()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.login_message = ('Login to access your Pokemon.')
-bootstrap = Bootstrap5
+bootstrap = Bootstrap5()
 
 
 def create_app():
