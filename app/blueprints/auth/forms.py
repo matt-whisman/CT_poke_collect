@@ -5,10 +5,25 @@ from app.blueprints.main.models import User
 
 
 class RegistrationForm(FlaskForm):
-    pass
+    username = StringField('Username', validators=[DataRequired])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Confirm Password', validators=[
+                              DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
 
     def validate_username(self, username):
-        pass
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('That username is taken.')
 
     def validate_email(self, email):
-        pass
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('An account with that email already exists.')
+
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Passwrod', validators=[DataRequired()])
+    submit = SubmitField('Sign In')
