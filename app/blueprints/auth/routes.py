@@ -2,7 +2,7 @@ from app import db
 from app.blueprints.auth.forms import LoginForm, RegistrationForm
 from app.blueprints.main.models import User
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from . import bp as app
@@ -40,6 +40,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('You are now registered.')
+        return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
 

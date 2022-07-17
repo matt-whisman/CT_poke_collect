@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.blueprints.main.models import User
 

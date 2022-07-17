@@ -12,14 +12,13 @@
         {% if current_user.is_authenticated %}
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="{{ url_for('main.search') }}">Search</a>
-          {% else %}
+        {% else %}
           <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-lg px-4">Login</a>
-          {% endif %}
+        {% endif %}
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="{{ url_for('auth.login' ) }}" role="button">Search</a> -->
 
 {% endblock content%}

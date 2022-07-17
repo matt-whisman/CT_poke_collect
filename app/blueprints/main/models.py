@@ -1,5 +1,6 @@
 from ast import For
 from datetime import datetime
+from enum import unique
 
 from app import db, login_manager
 from flask_login import UserMixin
@@ -32,6 +33,7 @@ class User(UserMixin, db.Model):
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    api_id = db.Column(db.Integer, unique=True)
     name = db.Column(db.String(50))
     type = db.Column(db.String(50))
     description = db.Column(db.String)
