@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
 
 {% block content %}
+
+.<div class="container mt-3">
+    <form action="/auth/register" method="post">
+        {{ render_form(form) }}
+    </form>
+    <div class="mb-3 mt-3">
+        <small>Already have an account? <a class="link-primary text-decoration-none"
+                href="{{ url_for('auth.login') }}">Login here</a></small>
+    </div>
+</div>
+
 
 {% endblock content%}
