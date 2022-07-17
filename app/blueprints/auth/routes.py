@@ -11,7 +11,7 @@ from . import bp as app
 @app.route('/login', methods=['get', 'post'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -29,7 +29,7 @@ def login():
     return render_template('auth/login.html', form=form)
 
 
-@app.route('/register', methods=['get', 'poast'])
+@app.route('/register', methods=['get', 'post'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
@@ -40,7 +40,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('You are now registered.')
-    return render_template('register.html', form=form)
+    return render_template('auth/register.html', form=form)
 
 
 @app.route('/logout')
