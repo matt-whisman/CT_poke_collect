@@ -9,12 +9,8 @@
     {{ render_form(form, action='/search', method='post') }}
 </div>
 
-<div class="container">
-    {% for data in api_response %}
-    <p>{{ data }}</p>
-    {% endfor %}
-    <p>Add to collection?</p>
-    <a class="btn btn-secondary" href="{{ url_for('main.search' ) }}" role="button">Add</a>
+<div class="container mt-3">
+    <a class="btn btn-secondary" href="{{ url_for('main.collection' ) }}" role="button">Go to Collection</a>
 </div>
 
 {% endblock content %}

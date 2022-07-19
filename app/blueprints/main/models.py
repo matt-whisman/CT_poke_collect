@@ -2,17 +2,11 @@ from ast import For
 from datetime import datetime
 from enum import unique
 
+from sqlalchemy import ForeignKey
+
 from app import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
-
-collection = db.Table(
-    'collection',
-    db.Column('user_id', db.Integer, db.ForeignKey(
-        'user.id'), primary_key=True),
-    db.Column('pokemon_id', db.Integer, db.ForeignKey(
-        'pokemon.id'), primary_key=True)
-)
 
 
 class User(UserMixin, db.Model):
@@ -21,8 +15,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(250))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    collection = db.relationship('Pokemon', secondary=collection,
-                                 lazy='subquery', backref=db.backref('users', lazy=True))
+    pokemon = db.relationship('Pokemon', backref='owner', lazy='dynamic')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -38,6 +31,7 @@ class Pokemon(db.Model):
     type = db.Column(db.String(50))
     description = db.Column(db.String)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 @login_manager.user_loader
